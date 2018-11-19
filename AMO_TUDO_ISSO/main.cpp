@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 typedef struct NO{
  		string nome;
 		int idade;
@@ -17,6 +15,7 @@ typedef struct NO{
 typedef struct NODOIS{
  		int numero;
  		int opcao;
+ 		int tempo = 0;
  		int vtotal;
 		struct NODOIS* proximo;
 }*Pedido;
@@ -35,8 +34,6 @@ typedef struct NOTRES{
  		int nota_b;
  		int nota_o;
 }*Votos;
-
-
 
 static Cliente head_idoso = NULL;
 static Cliente tail_idoso = NULL;
@@ -157,6 +154,30 @@ void mostrar(){
     }}
     cout<<endl;
 
+    system("pause");
+    system("CLS");
+
+}
+
+void mostrar_pedidos(){
+     if(vazio_ped()) {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |     FILA PEDIDOS VAZIA!!!     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
+        cout << endl;
+    } else {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |        FILA PEDIDOS           |"<<endl;
+    for(aux_ped = head_ped; aux_ped != NULL; aux_ped=aux_ped->proximo){
+        cout<<" | NUMERO: "<<aux_ped->numero<<endl;
+        cout<<" | OPÇÃO: "<<aux_ped->opcao<<endl;
+        cout<<" | VALOR TOTAL: "<<aux_ped->vtotal<<endl;
+        cout<<" | TEMPO: "<<aux_ped->tempo<<" Mins"<<endl;
+        cout<<" |_______________________________|"<<endl;
+    }}
+    cout << endl;
     system("pause");
     system("CLS");
 
@@ -320,6 +341,7 @@ void pedido(int x){
             tail_esp = aux_esp;
         }
         aux_ped = new NODOIS;
+        aux_ped->tempo = tempo;
         aux_ped->numero = numero;
         aux_ped->opcao = opcao;
         aux_ped->vtotal = vtotal;
@@ -340,7 +362,7 @@ void votar(){
     cout<<" |CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?|"<<endl;
     cout<<" |                        1-SIM 2-NÃO                          |"<<endl;
     cout<<" |_____________________________________________________________|"<<endl;
-    cout<<" | OPÇÂO: "
+    cout<<" | OPÇÂO: ";
     cout<<endl;
     cin>>opc;
     if(opc==1){
@@ -386,6 +408,10 @@ void votar(){
     system("CLS");
 }
 
+void chamar(int x){
+
+}
+
 void remover(int x){
 
         if(x ==1){
@@ -426,7 +452,6 @@ void remover(int x){
         }*/
 
 }
-
 
 void limpar_memorias(){
     Cliente Marvel;
@@ -476,8 +501,8 @@ void limpar_memorias(){
 
 int main(){
     setlocale(LC_ALL, "Portuguese");
-    int seletor=-1,idade,a;
-    string nome,name;
+    int seletor=-1,idade,numero;
+    string nome;
 
     do{
 
@@ -498,6 +523,7 @@ int main(){
     cout<<"|    2- BUSCAR NA FILA     |"<<endl;
     cout<<"|     3- FAZER PEDIDO      |"<<endl;
     cout<<"|    4- CHAMAR PEDIDO      |"<<endl;
+    cout<<"|    5- MOSTRAR PEDIDOS    |"<<endl;
     cout<<"|     8- MOSTRAR VOTOS     |"<<endl;
     cout<<"|     9- MOSTRAR FILAS     |"<<endl;
     cout<<"|    0- SAIR DO PROGRAMA   |"<<endl;
@@ -552,7 +578,18 @@ int main(){
                 break;
             }
             case 4:{
-                //chamar();
+                cout<<"____________________________"<<endl;
+                cout<<"|                          |"<<endl;
+                cout<<"|    *CHAMAR POR NUMERO*   |"<<endl;
+                cout<<"| NUMERO: ";
+                cin>>numero;
+                cout<<"|__________________________|"<<endl;
+                chamar(numero);
+                break;
+                }
+
+            case 5:{
+                mostrar_pedidos();
                 break;
                 }
 
