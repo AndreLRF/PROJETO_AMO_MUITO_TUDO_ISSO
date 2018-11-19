@@ -12,21 +12,21 @@ typedef struct NO{
 		int idade;
 		int numero_pedido;
 		struct NO* proximo;
- }*Cliente;
+}*Cliente;
 
 typedef struct NODOIS{
  		int numero;
  		int opcao;
  		int vtotal;
 		struct NODOIS* proximo;
- }*Pedido;
+}*Pedido;
 
 typedef struct NOTRES{
  		string nome;
  		int tempo;
  		int numero;
 		struct NOTRES* proximo;
- }*Espera;
+}*Espera;
 
  typedef struct NOQUATRO{
  		int nota_p;
@@ -107,33 +107,56 @@ void inserir_no_final(string novonome, int novaidade){
 }
 
 void mostrar(){
+     if(vazio_esp()) {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |      FILA ESPERA VAZIA!!!     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
+        cout << endl;
+    } else {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |         FILA ESPERA           |"<<endl;
+    for(aux_esp = head_esp; aux_esp != NULL; aux_esp=aux_esp->proximo){
+        cout<<" | "<<aux_esp->nome<<endl;
+        cout<<" | NUMERO:"<<aux_esp->numero<<"                     |"<<endl;
+        cout<<" | TEMPO: "<<aux_esp->tempo<<" Mins                 |"<<endl;
+        cout<<" |_______________________________|"<<endl;
+    }}
+    cout << endl;
     cout << endl;
     if(vazio_idoso()) {
-        cout<< "FILA DE IDOSOS VAZIA!!!" << endl;
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |       FILA IDOSO VAZIA!!!     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
         cout << endl;
     } else {
-    cout<<"FILA IDOSOS:"<<endl;
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |          FILA IDOSO           |"<<endl;
     for(aux_idoso = head_idoso; aux_idoso != NULL; aux_idoso=aux_idoso->proximo){
-        cout <<aux_idoso->nome <<" - "<< aux_idoso->idade <<" anos"<<endl;
+        cout<<" | "<<aux_idoso->nome<<" - "<< aux_idoso->idade <<" Anos"<<endl;
+        cout<<" |_______________________________|"<<endl;
     }}
+    cout << endl;
     cout<<endl;
   if(vazio_geral()) {
-        cout<< "FILA GERAL VAZIA!!!" << endl;
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |       FILA GERAL VAZIA!!!     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
         cout << endl;
     } else {
-    cout<<"FILA GERAL:"<<endl;
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |          FILA GERAL           |"<<endl;
     for(aux_geral = head_geral; aux_geral != NULL; aux_geral=aux_geral->proximo){
-        cout <<aux_geral->nome <<" - "<< aux_geral->idade <<" anos"<<endl;
+        cout<<" | "<<aux_geral->nome<<" - "<< aux_geral->idade <<" Anos"<<endl;
+        cout<<" |_______________________________|"<<endl;
     }}
     cout<<endl;
-    if(vazio_esp()) {
-        cout<< "FILA ESPERA VAZIA!!!" << endl;
-        cout << endl;
-    } else {
-    cout<<"FILA Espera:"<<endl;
-    for(aux_esp = head_esp; aux_esp != NULL; aux_esp=aux_esp->proximo){
-        cout <<aux_esp->nome <<" -no: "<< aux_esp->numero <<" -Tempo: "<< aux_esp->tempo<<" mins"<<endl;
-    }}
+
     system("pause");
     system("CLS");
 
@@ -142,51 +165,69 @@ void mostrar(){
 void mostrar_votos(){
     cout << endl;
     if(vazio_votos()) {
-        cout<< "NENHUM VOTO COMPUTADO" << endl;
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |     NENHUM VOTO COMPUTADO     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
         cout << endl;
     }else{
-    cout<<"Votos Computados:"<<endl;
-    cout <<"Otimo:    "<<votos->nota_o<<" Votos"<<endl;
-    cout <<"Bom:      "<<votos->nota_b<<" Votos"<<endl;
-    cout <<"Mediano:  "<<votos->nota_m<<" Votos"<<endl;
-    cout <<"Ruim:     "<<votos->nota_r<<" Votos"<<endl;
-    cout <<"Pessiomo: "<<votos->nota_p<<" Votos"<<endl;
+    cout<<"  _______________________________"<<endl;
+    cout<<" |                               |"<<endl;
+    cout<<" |       VOTOS  COMPUTADOS       |"<<endl;
+    cout<<" |     OTIMO............"<<votos->nota_o<<" VOTOS  |"<<endl;
+    cout<<" |     BOM.............."<<votos->nota_b<<" VOTOS  |"<<endl;
+    cout<<" |     MEDIANO.........."<<votos->nota_m<<" VOTOS  |"<<endl;
+    cout<<" |     RUIM............."<<votos->nota_r<<" VOTOS  |"<<endl;
+    cout<<" |     PESSIMO.........."<<votos->nota_p<<" VOTOS  |"<<endl;
+    cout<<" |_______________________________|"<<endl;
     }
     cout<<endl;
-
+    system("pause");
+    system("CLS");
 }
 
 void encontrar(string nome){
     cout << endl;
-    int i=1, j=1;
-    aux_idoso = head_idoso;
-    while (aux_idoso->proximo != NULL && aux_idoso->nome != nome) {
-        aux_idoso = aux_idoso->proximo;
-        i++;
-    }
-    if(aux_idoso->nome == nome)
-    {
-        cout << "Encontrado na fila de idoso na posicao:" << i << endl;
-    }
-    else if(aux_idoso->proximo == NULL)
-    {
-        cout << "Nenhum Nome encontrado na fila de idoso..." << endl;
-    }
-    cout << endl;
-    aux_geral = head_geral;
-    while (aux_geral->proximo != NULL && aux_geral->nome != nome) {
-        aux_geral = aux_geral->proximo;
-        j++;
-    }
-    if(aux_geral->nome == nome)
-    {
-        cout << "Encontrado na fila geral na posicao:" << j << endl;
-    }
-    else if(aux_geral->proximo == NULL)
-    {
-        cout << "Nenhum Nome encontrado na fila geral..." << endl;
-    }
+    int i=1, j=1,k=0;
 
+    if(aux_idoso!=NULL){
+        aux_idoso = head_idoso;
+        while (aux_idoso->proximo != NULL && aux_idoso->nome != nome){
+            aux_idoso = aux_idoso->proximo;
+            i++;
+        }
+        if(aux_idoso->nome == nome){
+            cout<<"  ________________________________________"<<endl;
+            cout<<" |                                        |"<<endl;
+            cout<<" |ENCONTRADO NA FILA IDOSO NA POSIÇÃO: "<<i<<"  |"<<endl;
+            cout<<" |________________________________________|"<<endl;
+        }
+        }else{
+            k=k+1;
+        }
+
+        if(aux_geral!=NULL){
+            aux_geral = head_geral;
+
+        while (aux_geral->proximo != NULL && aux_geral->nome != nome) {
+            aux_geral = aux_geral->proximo;
+            j++;
+        }
+        if(aux_geral->nome == nome){
+            cout<<"  ________________________________________"<<endl;
+            cout<<" |                                        |"<<endl;
+            cout<<" |ENCONTRADO NA FILA GERAL NA POSIÇÃO: "<<j<<"  |"<<endl;
+            cout<<" |________________________________________|"<<endl;
+        }
+        }else{
+            k=k+1;
+        }
+        if(k==2){
+            cout<<"  _____________________________________"<<endl;
+            cout<<" |                                    |"<<endl;
+            cout<<" |  NENHUM NOME FOI CADASTRADO AINDA  |"<<endl;
+            cout<<" |____________________________________|"<<endl;
+        }
     system("pause");
     system("CLS");
 
@@ -196,23 +237,31 @@ void pedido(int x){
     int numero,opcao,vtotal,tempo;
     numero = aux;
     aux = aux +1;
-        cout<<" ***FAZENDO PEDIDO***"<<endl;
+    cout<<"  _____________________________________"<<endl;
+    cout<<" |                                    |"<<endl;
+    cout<<" |      ***FAZENDO PEDIDO***          |"<<endl;
     if(x==1){
-        cout<<" FILA IDOSO"<<endl;
-        cout<<" Cliente: "<<head_idoso->nome<<" Pedido Numero: "<< numero<<endl;
+        cout<<" |            FILA IDOSO              |"<<endl;
+        cout<<" |   CLIENTE: "<<head_idoso->nome<<endl;
+        cout<<" |   PEDIDO NUMERO: "<< numero<<endl;
      }else{
-     cout<<" FILA GERAL"<<endl;
-        cout<<" Cliente: "<<head_geral->nome<<" Pedido Numero: "<< numero<<endl;
-     }
-        cout<<" Opções:"<<endl;
-        cout<<"  1-Hamburguer $20"<<endl;
-        cout<<"  2-Suco $5"<<endl;
-        cout<<"  3-Sobremesa $8"<<endl;
-        cout<<" COMBOS:"<<endl;
-        cout<<"  4-Hamburguer + Suco $24"<<endl;
-        cout<<"  5-Hamburguer + Sobremesa $26"<<endl;
-        cout<<"  6-Hamburguer + Suco + Sobremesa $30"<<endl;
-        cout<<"  7-Suco +Sobremesa $12"<<endl;
+        cout<<" |            FILA GERAL              |"<<endl;
+        cout<<" |   CLIENTE: "<<head_geral->nome<<endl;
+        cout<<" |   PEDIDO NUMERO: "<< numero<<endl;
+         }
+        cout<<" |____________________________________|"<<endl;
+        cout<<" |                                    |"<<endl;
+        cout<<" | OPÇÕES:                            |"<<endl;
+        cout<<" |  1-HAMBURGUER..................$20 |"<<endl;
+        cout<<" |  2-SUCO........................$5  |"<<endl;
+        cout<<" |  3-SPBREMESA...................$8  |"<<endl;
+        cout<<" | COMBOS:                            |"<<endl;
+        cout<<" |  4-HAMBURGUER+SUCO.............$24 |"<<endl;
+        cout<<" |  5-HAMBURGUER+SOBREMESA........$26 |"<<endl;
+        cout<<" |  6-HAMBURGUER+SUCO+SOBREMESA...$30 |"<<endl;
+        cout<<" |  7-SUCO+SOBREMESA..............$12 |"<<endl;
+        cout<<" |____________________________________|"<<endl;
+        cout<<" | OPÇÂO: "<<endl;
         cin>>opcao;
         switch(opcao){
                 case 1:{
@@ -251,7 +300,6 @@ void pedido(int x){
                 break;
                 }
         }
-
         aux_esp = new NOTRES;
         aux_esp->numero = numero;
         aux_esp->tempo = tempo;
@@ -283,13 +331,17 @@ void pedido(int x){
             tail_ped->proximo = aux_ped;
             tail_ped = aux_ped;
         }
-        system("CLS");
 }
 
 void votar(){
     int opc,aux;
-    cout<<"CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?"<<endl;
-    cout<<" 1-SIM 2-NÃO"<<endl;
+    cout<<"  _____________________________________________________________"<<endl;
+    cout<<" |                                                             |"<<endl;
+    cout<<" |CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?|"<<endl;
+    cout<<" |                        1-SIM 2-NÃO                          |"<<endl;
+    cout<<" |_____________________________________________________________|"<<endl;
+    cout<<" | OPÇÂO: "
+    cout<<endl;
     cin>>opc;
     if(opc==1){
         if(vazio_votos()){
@@ -300,32 +352,38 @@ void votar(){
         votos->nota_r =0;
         votos->nota_p =0;
         }
-        cout<<"Indique qual seu nivel de satisfação com o atendimento"<<endl;
-        cout<<"1-Pessimo 2-Ruim 3-Mediano 4-Bom 5-Otimo "<<endl;
-        cin>>aux;
-        switch(aux){
-            case 1:{
-                votos->nota_p=votos->nota_p+1;
-                break;
-                }
-            case 2:{
-                votos->nota_r=votos->nota_r+1;
-                break;
-                }
-            case 3:{
-                votos->nota_m=votos->nota_m+1;
-                break;
-                }
-            case 4:{
-                votos->nota_b=votos->nota_b+1;
-                break;
-                }
-            case 5:{
-                votos->nota_o=votos->nota_o+1;
-                break;
-                }
+    cout<<"  _____________________________________________________________"<<endl;
+    cout<<" |                                                             |"<<endl;
+    cout<<" |    INDIQUE QUAL SEU NIVEL DE SATISFAÇÃO COM O ATENDIMENTO   |"<<endl;
+    cout<<" |            1-PESSIMO 2-RUIM 3-MEDIANO 4-BOM 5-OTIMO         |"<<endl;
+    cout<<" |_____________________________________________________________|"<<endl;
+    cout<<" | OPÇÂO: "<<endl;
+    cin>>aux;
+    switch(aux){
+        case 1:{
+            votos->nota_p=votos->nota_p+1;
+            break;
+            }
+        case 2:{
+            votos->nota_r=votos->nota_r+1;
+            break;
+            }
+        case 3:{
+            votos->nota_m=votos->nota_m+1;
+            break;
+            }
+        case 4:{
+            votos->nota_b=votos->nota_b+1;
+            break;
+            }
+        case 5:{
+            votos->nota_o=votos->nota_o+1;
+            break;
+            }
         }
     }
+    system("pause");
+    system("CLS");
 }
 
 void remover(int x){
@@ -422,38 +480,66 @@ int main(){
     string nome,name;
 
     do{
+
+    cout<<"      ________________      "<<endl;
+    cout<<"     ( ' ' ' ' ' ' ' ')     "<<endl;
+    cout<<"    (_'_'_'_'_'_'_'_'_')    "<<endl;
+    cout<<"     //////////////////     "<<endl;
+    cout<<"     __________________     "<<endl;
+    cout<<"    ( ORLANDO'S BURGER )    "<<endl;
+    cout<<"    (__________________)    "<<endl;
+    cout<<"    @@@@@@@@@@@@@@@@@@@@@   "<<endl;
+    cout<<"     ___________________    "<<endl;
+    cout<<"    (___________________)   "<<endl;
     cout<<endl;
-    cout<<"1- Novo Cliente"<<endl;
-    cout<<"2- Buscar na Fila"<<endl;
-    cout<<"3- Fazer Pedido"<<endl;
-    cout<<"4- Chamar Pedido"<<endl;
-    cout<<"8- Mostrar Votos"<<endl;
-    cout<<"9- Mostrar Filas"<<endl;
-    cout<<"0- Sair do Programa"<<endl;
+    cout<<"____________________________"<<endl;
+    cout<<"|                          |"<<endl;
+    cout<<"|     1- NOVO CLIENTE      |"<<endl;
+    cout<<"|    2- BUSCAR NA FILA     |"<<endl;
+    cout<<"|     3- FAZER PEDIDO      |"<<endl;
+    cout<<"|    4- CHAMAR PEDIDO      |"<<endl;
+    cout<<"|     8- MOSTRAR VOTOS     |"<<endl;
+    cout<<"|     9- MOSTRAR FILAS     |"<<endl;
+    cout<<"|    0- SAIR DO PROGRAMA   |"<<endl;
+    cout<<"|__________________________|"<<endl;
     cin>>seletor;
     system("CLS");
     cout<<endl;
     switch(seletor){
             case 1:{
-                cout<<"Nome do Cliente:"<<endl;
+                cout<<"____________________________"<<endl;
+                cout<<"|                          |"<<endl;
+                cout<<"|      *NOVO  CLIENTE*     |"<<endl;
+                cout<<"|    NOME: ";
                 cin>>nome;
-                cout<<"Idade do Cliente:"<<endl;
+                cout<<"|    IDADE: ";
                 cin>>idade;
+                cout<<"|__________________________|"<<endl;
                 inserir_no_final(nome,idade);
                 break;
                 }
 
             case 2:{
-                cout<<"Pesquiser por nome do Cliente:"<<endl;
+                cout<<"____________________________"<<endl;
+                cout<<"|                          |"<<endl;
+                cout<<"|    *PESQUISA POR NOME*   |"<<endl;
+                cout<<"|  NOME: ";
                 cin>>nome;
+                cout<<"|__________________________|"<<endl;
                 encontrar(nome);
                 break;
             }
 
             case 3:{
                 if(vazio_idoso() && vazio_geral()){
-                    cout<<"FILAS VAZIAS"<<endl;
+                    cout<<"____________________________"<<endl;
+                    cout<<"|                          |"<<endl;
+                    cout<<"|       FILAS VAZIAS       |"<<endl;
+                    cout<<"|__________________________|"<<endl;
                     cout<<endl;
+                    system("pause");
+                    system("CLS");
+
                 }else if( head_idoso!= NULL){
                     pedido(1);
                     votar();
