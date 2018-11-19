@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//typedef int ELEMENTO;
+
 
 typedef struct NO{
  		string nome;
@@ -29,9 +29,12 @@ typedef struct NOTRES{
  }*Espera;
 
  typedef struct NOQUATRO{
- 		int nota;
- 		struct NOQUATRO* proximo;
- }*Votos;
+ 		int nota_p;
+ 		int nota_r;
+ 		int nota_m;
+ 		int nota_b;
+ 		int nota_o;
+}*Votos;
 
 
 
@@ -51,23 +54,25 @@ static Espera head_esp = NULL;
 static Espera tail_esp = NULL;
 static Espera aux_esp = NULL;
 
+static Votos votos = NULL;
+
 static int aux = 1;
 static int del = 0;
 
 bool vazio_idoso(){
     return head_idoso == NULL;
 }
-
 bool vazio_geral(){
     return head_geral == NULL;
 }
-
 bool vazio_ped(){
     return head_ped == NULL;
 }
-
 bool vazio_esp(){
     return head_esp == NULL;
+}
+bool vazio_votos(){
+    return votos == NULL;
 }
 
 void inserir_no_final(string novonome, int novaidade){
@@ -131,6 +136,23 @@ void mostrar(){
     }}
     system("pause");
     system("CLS");
+
+}
+
+void mostrar_votos(){
+    cout << endl;
+    if(vazio_votos()) {
+        cout<< "NENHUM VOTO COMPUTADO" << endl;
+        cout << endl;
+    }else{
+    cout<<"Votos Computados:"<<endl;
+    cout <<"Otimo:    "<<votos->nota_o<<" Votos"<<endl;
+    cout <<"Bom:      "<<votos->nota_b<<" Votos"<<endl;
+    cout <<"Mediano:  "<<votos->nota_m<<" Votos"<<endl;
+    cout <<"Ruim:     "<<votos->nota_r<<" Votos"<<endl;
+    cout <<"Pessiomo: "<<votos->nota_p<<" Votos"<<endl;
+    }
+    cout<<endl;
 
 }
 
@@ -264,6 +286,47 @@ void pedido(int x){
         system("CLS");
 }
 
+void votar(){
+    int opc,aux;
+    cout<<"CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?"<<endl;
+    cout<<" 1-SIM 2-NÃO"<<endl;
+    cin>>opc;
+    if(aux==1){
+        if(vazio_votos()){
+        votos = new NOQUATRO;
+        votos->nota_o =0;
+        votos->nota_b =0;
+        votos->nota_m =0;
+        votos->nota_r =0;
+        votos->nota_p =0;
+        }
+        cout<<"Indique qual seu nivel de satisfação com o atendimento"<<endl;
+        cout<<"1-Pessimo 2-Ruim 3-Mediano 4-Bom 5-Otimo "<<endl;
+        cin>>aux;
+        switch(aux){
+            case 1:{
+                votos->nota_p=votos->nota_p+1;
+                break;
+                }
+            case 2:{
+                votos->nota_r=votos->nota_r+1;
+                break;
+                }
+            case 3:{
+                votos->nota_m=votos->nota_m+1;
+                break;
+                }
+            case 4:{
+                votos->nota_b=votos->nota_b+1;
+                break;
+                }
+            case 5:{
+                votos->nota_o=votos->nota_o+1;
+                break;
+                }
+        }
+}
+
 void remover(int x){
 
         if(x ==1){
@@ -319,6 +382,7 @@ void limpar_memorias(){
     delete tail_idoso;
     delete tail_ped;
     delete tail_esp;
+    delete votos
 
     while (head_geral->proximo != NULL) {
         Marvel = head_geral;
@@ -361,6 +425,7 @@ int main(){
     cout<<"1- Novo Cliente"<<endl;
     cout<<"2- Buscar na Fila"<<endl;
     cout<<"3- Fazer Pedido"<<endl;
+    cout<<"4- Chamar Pedido"<<endl;
     cout<<"9- Mostrar filas"<<endl;
     cout<<"0- Sair do Programa"<<endl;
     cin>>seletor;
@@ -389,15 +454,25 @@ int main(){
                     cout<<endl;
                 }else if( head_idoso!= NULL){
                     pedido(1);
+                    votar();
                     remover(1);
                 }else{
                     pedido(2);
+                    votar();
                     remover(2);
                 }
                 break;
             }
+            case 4:{
+                chamar();
+                break;
+                }
 
 
+            case 8:{
+                mostrar_votos();
+                break;
+                }
             case 9:{
                 mostrar();
                 break;
