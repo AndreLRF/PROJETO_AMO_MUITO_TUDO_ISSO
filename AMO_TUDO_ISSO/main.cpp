@@ -282,7 +282,7 @@ void pedido(int x){
         cout<<" |  6-HAMBURGUER+SUCO+SOBREMESA...$30 |"<<endl;
         cout<<" |  7-SUCO+SOBREMESA..............$12 |"<<endl;
         cout<<" |____________________________________|"<<endl;
-        cout<<" | OPÇÂO: "<<endl;
+        cout<<" | OPÇÂO: ";
         cin>>opcao;
         switch(opcao){
                 case 1:{
@@ -363,8 +363,8 @@ void votar(){
     cout<<" |                        1-SIM 2-NÃO                          |"<<endl;
     cout<<" |_____________________________________________________________|"<<endl;
     cout<<" | OPÇÂO: ";
-    cout<<endl;
     cin>>opc;
+    cout<<endl;
     if(opc==1){
         if(vazio_votos()){
         votos = new NOQUATRO;
@@ -379,7 +379,7 @@ void votar(){
     cout<<" |    INDIQUE QUAL SEU NIVEL DE SATISFAÇÃO COM O ATENDIMENTO   |"<<endl;
     cout<<" |            1-PESSIMO 2-RUIM 3-MEDIANO 4-BOM 5-OTIMO         |"<<endl;
     cout<<" |_____________________________________________________________|"<<endl;
-    cout<<" | OPÇÂO: "<<endl;
+    cout<<" | OPÇÂO: ";
     cin>>aux;
     switch(aux){
         case 1:{
@@ -408,8 +408,19 @@ void votar(){
     system("CLS");
 }
 
-void chamar(int x){
+void chamar(int numero_chamado){
+     cout << endl;
+     if(aux_ped!=NULL){
+        aux_ped = head_ped;
+        while (aux_ped->proximo != NULL && aux_ped->numero != numero_chamado){
+            aux_ped = aux_ped->proximo;
+        }
+        if(aux_ped->numero == numero_chamado){
+           //DELETAR DAS FILAS PEDIDOS E ESPERA
+        }
 
+    system("pause");
+    system("CLS");
 }
 
 void remover(int x){
@@ -506,13 +517,13 @@ int main(){
 
     do{
 
-    cout<<"      ________________      "<<endl;
-    cout<<"     ( ' ' ' ' ' ' ' ')     "<<endl;
-    cout<<"    (_'_'_'_'_'_'_'_'_')    "<<endl;
-    cout<<"     //////////////////     "<<endl;
-    cout<<"     __________________     "<<endl;
-    cout<<"    ( ORLANDO'S BURGER )    "<<endl;
-    cout<<"    (__________________)    "<<endl;
+    cout<<"      _________________      "<<endl;
+    cout<<"     ( ' ' ' '  ' ' ' ')     "<<endl;
+    cout<<"    (_'_'_'_'_'__'_'_'_')    "<<endl;
+    cout<<"    /#/#/#/#/#/#/#/#/#/#    "<<endl;
+    cout<<"    =_=_=_=_=_=_=_=_=_=_=   "<<endl;
+    cout<<"    ( ORLANDO'S  BURGER )    "<<endl;
+    cout<<"    (___________________)    "<<endl;
     cout<<"    @@@@@@@@@@@@@@@@@@@@@   "<<endl;
     cout<<"     ___________________    "<<endl;
     cout<<"    (___________________)   "<<endl;
@@ -524,10 +535,11 @@ int main(){
     cout<<"|     3- FAZER PEDIDO      |"<<endl;
     cout<<"|    4- CHAMAR PEDIDO      |"<<endl;
     cout<<"|    5- MOSTRAR PEDIDOS    |"<<endl;
-    cout<<"|     8- MOSTRAR VOTOS     |"<<endl;
-    cout<<"|     9- MOSTRAR FILAS     |"<<endl;
+    cout<<"|     6- MOSTRAR VOTOS     |"<<endl;
+    cout<<"|     7- MOSTRAR FILAS     |"<<endl;
     cout<<"|    0- SAIR DO PROGRAMA   |"<<endl;
     cout<<"|__________________________|"<<endl;
+    cout<<"| OPÇÂO: ";
     cin>>seletor;
     system("CLS");
     cout<<endl;
@@ -594,11 +606,11 @@ int main(){
                 }
 
 
-            case 8:{
+            case 6:{
                 mostrar_votos();
                 break;
                 }
-            case 9:{
+            case 7:{
                 mostrar();
                 break;
                 }
@@ -606,7 +618,23 @@ int main(){
 
     }while(seletor!=0);
     system("CLS");
-    cout<<"BYE"<<endl;
+    cout<<"  _____   __    __   _______       __    __   __    __   __   ________   _______  "<<endl;
+    cout<<" |  _  | |  |  |  | |  ___  |     |  |  |  | |  |  |  | |  | |__   ___| |  ___  | "<<endl;
+    cout<<" | |_| | |    /   | | |   | |     |    /   | |  |  |  | |  |    |  |    | |   | | "<<endl;
+    cout<<" |  _  | | |   /| | | |   | |     | |   /| | |  |  |  | |  |    |  |    | |   | | "<<endl;
+    cout<<" | | | | | |  / | | | |___| |     | |  / | | |  |__|  | |  |    |  |    | |___| | "<<endl;
+    cout<<" |_| |_| |_|    |_| |_______|     |_|    |_| |________| |__|    |__|    |_______| "<<endl;
+    cout<<"  ________   __    __   ______    _______      __   ______   ______   _______  ___ "<<endl;
+    cout<<" |__   ___| |  |  |  | |  ___    |  ___  |    |  | |  ____| |   ___| |  ___  ||   |"<<endl;
+    cout<<"    |  |    |  |  |  | | |   | | | |   | |    |  | | |____  | |____  | |   | ||   |"<<endl;
+    cout<<"    |  |    |  |  |  | | |   | | | |   | |    |  | |____  | |____  | | |   | ||   |"<<endl;
+    cout<<"    |  |    |  |__|  | | |___| | | |___| |    |  |  ____| |  ____| | | |___| |   /"<<endl;
+    cout<<"    |__|    |________| |______/  |_______|    |__| |______| |______| |_______| (_)"<<endl;
+
+
+
+
+
     system("pause");
     limpar_memorias();
 	return 0;
