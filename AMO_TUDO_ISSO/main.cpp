@@ -291,7 +291,7 @@ void votar(){
     cout<<"CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?"<<endl;
     cout<<" 1-SIM 2-NÃO"<<endl;
     cin>>opc;
-    if(aux==1){
+    if(opc==1){
         if(vazio_votos()){
         votos = new NOQUATRO;
         votos->nota_o =0;
@@ -325,6 +325,7 @@ void votar(){
                 break;
                 }
         }
+    }
 }
 
 void remover(int x){
@@ -382,7 +383,7 @@ void limpar_memorias(){
     delete tail_idoso;
     delete tail_ped;
     delete tail_esp;
-    delete votos
+    delete votos;
 
     while (head_geral->proximo != NULL) {
         Marvel = head_geral;
@@ -426,7 +427,8 @@ int main(){
     cout<<"2- Buscar na Fila"<<endl;
     cout<<"3- Fazer Pedido"<<endl;
     cout<<"4- Chamar Pedido"<<endl;
-    cout<<"9- Mostrar filas"<<endl;
+    cout<<"8- Mostrar Votos"<<endl;
+    cout<<"9- Mostrar Filas"<<endl;
     cout<<"0- Sair do Programa"<<endl;
     cin>>seletor;
     system("CLS");
@@ -464,7 +466,7 @@ int main(){
                 break;
             }
             case 4:{
-                chamar();
+                //chamar();
                 break;
                 }
 
