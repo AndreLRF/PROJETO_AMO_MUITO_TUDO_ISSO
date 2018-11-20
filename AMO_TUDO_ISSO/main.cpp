@@ -102,7 +102,7 @@ void inserir_no_final(string novonome, int novaidade){
 
 }
 
-void mostrar(){
+void mostrar_filas(){
    if(vazio_idoso()) {
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
@@ -132,7 +132,7 @@ void mostrar(){
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
         cout<<" |          FILA GERAL           |"<<endl;
-    for(aux_geral = head_geral; aux_geral != NULL; aux_geral=aux_geral->proximo){
+    for(aux_geral = head_geral;aux_geral != NULL; aux_geral=aux_geral->proximo){
         cout<<" | "<<aux_geral->nome<<" - "<< aux_geral->idade <<" Anos"<<endl;
         cout<<" |                               |"<<endl;
     }
@@ -151,7 +151,7 @@ void mostrar(){
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
         cout<<" |         FILA ESPERA           |"<<endl;
-    for(aux_esp = head_esp; aux_esp != NULL; aux_esp=aux_esp->proximo){
+    for(aux_esp = head_esp; aux_esp!= NULL; aux_esp=aux_esp->proximo){
         cout<<" | NOME: "<<aux_esp->nome<<endl;
         cout<<" | NUMERO: "<<aux_esp->numero<<"                     |"<<endl;
         cout<<" | TEMPO: "<<aux_esp->tempo<<" Mins                 |"<<endl;
@@ -230,11 +230,6 @@ void encontrar(string nome){
             cout<<" |                                        |"<<endl;
             cout<<" |ENCONTRADO NA FILA IDOSO NA POSIÇÃO: "<<i<<"  |"<<endl;
             cout<<" |________________________________________|"<<endl;
-        }else{
-            cout<<"  _____________________________________"<<endl;
-            cout<<" |                                    |"<<endl;
-            cout<<" | NOME NAO ENCONTRADO NA FILA IDOSO  |"<<endl;
-            cout<<" |____________________________________|"<<endl;
         }
     }
     aux_geral = head_geral;
@@ -259,7 +254,7 @@ void encontrar(string nome){
         if(aux_geral==NULL && aux_idoso==NULL){
             cout<<"  _____________________________________"<<endl;
             cout<<" |                                    |"<<endl;
-            cout<<" |  NENHUM NOME FOI CADASTRADO AINDA  |"<<endl;
+            cout<<" |        NOME NAO ENCONTRADO         |"<<endl;
             cout<<" |____________________________________|"<<endl;
         }
 
@@ -431,17 +426,18 @@ void chamar(int numero_chamado){
         cout<<" |_______________________________|"<<endl;
         cout << endl;
     }else{
+        aux_ped = head_ped;
          if(aux_ped!=NULL){
-            aux_ped = head_ped;
             while (aux_ped->proximo != NULL && aux_ped->numero != numero_chamado){
                 aux_ped = aux_ped->proximo;
             }
+        }
+         aux_esp = head_esp;
          if(aux_esp!=NULL){
-            aux_esp = head_esp;
             while (aux_esp->proximo != NULL && aux_esp->numero != numero_chamado){
                 aux_ped = aux_ped->proximo;
             }
-
+         }
             if(aux_ped->numero == numero_chamado){
                 cout<<"  _______________________________"<<endl;
                 cout<<" |                               |"<<endl;
@@ -464,9 +460,7 @@ void chamar(int numero_chamado){
               delete aux_ped;
               delete aux_esp;
 
-            }
-         }
-     }
+    }
     system("pause");
     system("CLS");
 }
@@ -488,7 +482,6 @@ void remover(int x){
         prev->proximo = aux_idoso->proximo;
         delete aux_idoso;*/
 }
-
 
 void limpar_memorias(){
     Cliente Marvel;
@@ -637,7 +630,7 @@ int main(){
                 break;
                 }
             case 7:{
-                mostrar();
+                mostrar_filas();
                 break;
                 }
     }
