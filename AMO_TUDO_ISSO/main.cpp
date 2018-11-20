@@ -451,15 +451,19 @@ void chamar(int numero_chamado){
                 cout<<" | VALOR TOTAL: "<<aux_ped->vtotal<<endl;
                 cout<<" | TEMPO: "<<aux_ped->tempo<<" Mins"<<endl;
                 cout<<" |_______________________________|"<<endl;
-
             }
                //DELETAR DAS FILAS PEDIDOS E ESPERA
-               aux_esp = head_esp;
-               head_idoso = head_idoso->proximo;
-               delete aux_idoso;
-               aux_idoso = head_idoso;
-               head_idoso = head_idoso->proximo;
-               delete aux_idoso;
+              //temp = head;
+              NODOIS *prev_ped;
+              prev_ped = aux_ped;
+              prev_ped->proximo = aux_ped->proximo;
+
+              NOTRES *prev_esp;
+              prev_esp = aux_esp;
+              prev_esp->proximo = aux_esp->proximo;
+              delete aux_ped;
+              delete aux_esp;
+
             }
          }
      }
