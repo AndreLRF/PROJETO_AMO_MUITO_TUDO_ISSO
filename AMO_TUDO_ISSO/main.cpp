@@ -54,7 +54,6 @@ static Espera aux_esp = NULL;
 static Votos votos = NULL;
 
 static int aux = 1;
-static int del = 0;
 
 bool vazio_idoso(){
     return head_idoso == NULL;
@@ -104,25 +103,7 @@ void inserir_no_final(string novonome, int novaidade){
 }
 
 void mostrar(){
-     if(vazio_esp()) {
-        cout<<"  _______________________________"<<endl;
-        cout<<" |                               |"<<endl;
-        cout<<" |      FILA ESPERA VAZIA!!!     |"<< endl;
-        cout<<" |_______________________________|"<<endl;
-        cout << endl;
-    } else {
-        cout<<"  _______________________________"<<endl;
-        cout<<" |                               |"<<endl;
-        cout<<" |         FILA ESPERA           |"<<endl;
-    for(aux_esp = head_esp; aux_esp != NULL; aux_esp=aux_esp->proximo){
-        cout<<" | "<<aux_esp->nome<<endl;
-        cout<<" | NUMERO:"<<aux_esp->numero<<"                     |"<<endl;
-        cout<<" | TEMPO: "<<aux_esp->tempo<<" Mins                 |"<<endl;
-        cout<<" |_______________________________|"<<endl;
-    }}
-    cout << endl;
-    cout << endl;
-    if(vazio_idoso()) {
+   if(vazio_idoso()) {
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
         cout<<" |       FILA IDOSO VAZIA!!!     |"<< endl;
@@ -134,10 +115,13 @@ void mostrar(){
         cout<<" |          FILA IDOSO           |"<<endl;
     for(aux_idoso = head_idoso; aux_idoso != NULL; aux_idoso=aux_idoso->proximo){
         cout<<" | "<<aux_idoso->nome<<" - "<< aux_idoso->idade <<" Anos"<<endl;
-        cout<<" |_______________________________|"<<endl;
-    }}
-    cout << endl;
+        cout<<" |                               |"<<endl;
+    }
+    cout<<" |_______________________________|"<<endl;
+    }
     cout<<endl;
+    cout<<endl;
+
   if(vazio_geral()) {
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
@@ -150,9 +134,34 @@ void mostrar(){
         cout<<" |          FILA GERAL           |"<<endl;
     for(aux_geral = head_geral; aux_geral != NULL; aux_geral=aux_geral->proximo){
         cout<<" | "<<aux_geral->nome<<" - "<< aux_geral->idade <<" Anos"<<endl;
-        cout<<" |_______________________________|"<<endl;
-    }}
+        cout<<" |                               |"<<endl;
+    }
+    cout<<" |_______________________________|"<<endl;
+    }
     cout<<endl;
+    cout<<endl;
+
+       if(vazio_esp()) {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |      FILA ESPERA VAZIA!!!     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
+        cout << endl;
+    } else {
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |         FILA ESPERA           |"<<endl;
+    for(aux_esp = head_esp; aux_esp != NULL; aux_esp=aux_esp->proximo){
+        cout<<" | NOME: "<<aux_esp->nome<<endl;
+        cout<<" | NUMERO: "<<aux_esp->numero<<"                     |"<<endl;
+        cout<<" | TEMPO: "<<aux_esp->tempo<<" Mins                 |"<<endl;
+        cout<<" |_______________________________|"<<endl;
+        cout<<" |                               |"<<endl;
+    }
+     cout<<" |_______________________________|"<<endl;
+    }
+    cout << endl;
+    cout << endl;
 
     system("pause");
     system("CLS");
@@ -209,28 +218,28 @@ void mostrar_votos(){
 
 void encontrar(string nome){
     cout << endl;
-    int i=1, j=1,k=0;
-
+    int i=1, j=1;
+    aux_idoso = head_idoso;
     if(aux_idoso!=NULL){
-        aux_idoso = head_idoso;
         while (aux_idoso->proximo != NULL && aux_idoso->nome != nome){
             aux_idoso = aux_idoso->proximo;
             i++;
-        }
+            }
         if(aux_idoso->nome == nome){
             cout<<"  ________________________________________"<<endl;
             cout<<" |                                        |"<<endl;
             cout<<" |ENCONTRADO NA FILA IDOSO NA POSIÇÃO: "<<i<<"  |"<<endl;
             cout<<" |________________________________________|"<<endl;
-        }
         }else{
-            k=k+1;
+            cout<<"  _____________________________________"<<endl;
+            cout<<" |                                    |"<<endl;
+            cout<<" | NOME NAO ENCONTRADO NA FILA IDOSO  |"<<endl;
+            cout<<" |____________________________________|"<<endl;
         }
-
-        if(aux_geral!=NULL){
-            aux_geral = head_geral;
-
-        while (aux_geral->proximo != NULL && aux_geral->nome != nome) {
+    }
+    aux_geral = head_geral;
+    if(aux_geral!=NULL){
+        while (aux_geral->proximo != NULL && aux_geral->nome != nome){
             aux_geral = aux_geral->proximo;
             j++;
         }
@@ -239,16 +248,21 @@ void encontrar(string nome){
             cout<<" |                                        |"<<endl;
             cout<<" |ENCONTRADO NA FILA GERAL NA POSIÇÃO: "<<j<<"  |"<<endl;
             cout<<" |________________________________________|"<<endl;
-        }
         }else{
-            k=k+1;
+            cout<<"  _____________________________________"<<endl;
+            cout<<" |                                    |"<<endl;
+            cout<<" |         NOME NAO ENCONTRADO        |"<<endl;
+            cout<<" |____________________________________|"<<endl;
         }
-        if(k==2){
+    }
+
+        if(aux_geral==NULL && aux_idoso==NULL){
             cout<<"  _____________________________________"<<endl;
             cout<<" |                                    |"<<endl;
             cout<<" |  NENHUM NOME FOI CADASTRADO AINDA  |"<<endl;
             cout<<" |____________________________________|"<<endl;
         }
+
     system("pause");
     system("CLS");
 
@@ -282,7 +296,7 @@ void pedido(int x){
         cout<<" |  6-HAMBURGUER+SUCO+SOBREMESA...$30 |"<<endl;
         cout<<" |  7-SUCO+SOBREMESA..............$12 |"<<endl;
         cout<<" |____________________________________|"<<endl;
-        cout<<" | OPÇÂO: ";
+        cout<<" |_OPÇÂO: ";
         cin>>opcao;
         switch(opcao){
                 case 1:{
@@ -356,13 +370,13 @@ void pedido(int x){
 }
 
 void votar(){
-    int opc,aux;
+    int opc,voto;
     cout<<"  _____________________________________________________________"<<endl;
     cout<<" |                                                             |"<<endl;
     cout<<" |CLIENTE GOSTARIA DE PARTICIPAR DE UMA PESQUISA DE SATISFAÇÂO?|"<<endl;
     cout<<" |                        1-SIM 2-NÃO                          |"<<endl;
     cout<<" |_____________________________________________________________|"<<endl;
-    cout<<" | OPÇÂO: ";
+    cout<<" |_OPÇÂO: ";
     cin>>opc;
     cout<<endl;
     if(opc==1){
@@ -379,9 +393,9 @@ void votar(){
     cout<<" |    INDIQUE QUAL SEU NIVEL DE SATISFAÇÃO COM O ATENDIMENTO   |"<<endl;
     cout<<" |            1-PESSIMO 2-RUIM 3-MEDIANO 4-BOM 5-OTIMO         |"<<endl;
     cout<<" |_____________________________________________________________|"<<endl;
-    cout<<" | OPÇÂO: ";
-    cin>>aux;
-    switch(aux){
+    cout<<" |_OPÇÂO: ";
+    cin>>voto;
+    switch(voto){
         case 1:{
             votos->nota_p=votos->nota_p+1;
             break;
@@ -410,15 +424,45 @@ void votar(){
 
 void chamar(int numero_chamado){
      cout << endl;
-     if(aux_ped!=NULL){
-        aux_ped = head_ped;
-        while (aux_ped->proximo != NULL && aux_ped->numero != numero_chamado){
-            aux_ped = aux_ped->proximo;
-        }
-        if(aux_ped->numero == numero_chamado){
-           //DELETAR DAS FILAS PEDIDOS E ESPERA
-        }
+    if(vazio_ped()){
+        cout<<"  _______________________________"<<endl;
+        cout<<" |                               |"<<endl;
+        cout<<" |   NENHUM PEDIDO COMPUTADO     |"<< endl;
+        cout<<" |_______________________________|"<<endl;
+        cout << endl;
+    }else{
+         if(aux_ped!=NULL){
+            aux_ped = head_ped;
+            while (aux_ped->proximo != NULL && aux_ped->numero != numero_chamado){
+                aux_ped = aux_ped->proximo;
+            }
+         if(aux_esp!=NULL){
+            aux_esp = head_esp;
+            while (aux_esp->proximo != NULL && aux_esp->numero != numero_chamado){
+                aux_ped = aux_ped->proximo;
+            }
 
+            if(aux_ped->numero == numero_chamado){
+                cout<<"  _______________________________"<<endl;
+                cout<<" |                               |"<<endl;
+                cout<<" |   PEDIDO NUMERO: "<<numero_chamado<<endl;
+                cout<<" | NOME: "<<aux_esp->nome<<endl;
+                cout<<" | OPÇÃO: "<<aux_ped->opcao<<endl;
+                cout<<" | VALOR TOTAL: "<<aux_ped->vtotal<<endl;
+                cout<<" | TEMPO: "<<aux_ped->tempo<<" Mins"<<endl;
+                cout<<" |_______________________________|"<<endl;
+
+            }
+               //DELETAR DAS FILAS PEDIDOS E ESPERA
+               aux_esp = head_esp;
+               head_idoso = head_idoso->proximo;
+               delete aux_idoso;
+               aux_idoso = head_idoso;
+               head_idoso = head_idoso->proximo;
+               delete aux_idoso;
+            }
+         }
+     }
     system("pause");
     system("CLS");
 }
@@ -426,43 +470,21 @@ void chamar(int numero_chamado){
 void remover(int x){
 
         if(x ==1){
-        aux_idoso = head_idoso;
-        head_idoso = head_idoso->proximo;
-        delete aux_idoso;
+          aux_idoso = head_idoso;
+          head_idoso = head_idoso->proximo;
+          delete aux_idoso;
         }else{
-        aux_geral = head_geral;
-        head_geral = head_geral->proximo;
-        delete aux_geral;
-
+          aux_geral = head_geral;
+          head_geral = head_geral->proximo;
+          delete aux_geral;
         }
-       /* while(aux_idoso->proximo!=NULL && aux_idoso->nome != x){
-            prev = aux_idoso;
-            aux_idoso = aux_idoso->proximo;
-        }
-        if(aux_idoso->nome == x) {
-            prev->proximo = aux_idoso->proximo;
-            delete aux_idoso;
-        }
-        else if(aux_idoso->proximo == NULL)
-        {
-            cout << "Nome " << x << " nao encontrado para ser removido." << endl;
-        }
-    }else{
-        aux_geral = head_geral;
-        while(aux_geral->proximo != NULL && aux_geral->nome != x){
-            prev = aux_geral;
-            aux_geral = aux_geral->proximo;
-        }
-        if(aux_geral->nome == x) {
-            prev->proximo = aux_geral->proximo;
-            delete aux_geral;
-        }
-        else if(aux_geral->proximo == NULL)
-        {
-            cout << "Nome " << x << " nao encontrado para ser removido." << endl;
-        }*/
-
+        /*
+        aux_idoso = head_idoso;
+        NO *prev;
+        prev->proximo = aux_idoso->proximo;
+        delete aux_idoso;*/
 }
+
 
 void limpar_memorias(){
     Cliente Marvel;
@@ -517,63 +539,63 @@ int main(){
 
     do{
 
-    cout<<"      _________________      "<<endl;
-    cout<<"     ( ' ' ' '  ' ' ' ')     "<<endl;
-    cout<<"    (_'_'_'_'_'__'_'_'_')    "<<endl;
-    cout<<"    /#/#/#/#/#/#/#/#/#/#    "<<endl;
-    cout<<"    =_=_=_=_=_=_=_=_=_=_=   "<<endl;
-    cout<<"    ( ORLANDO'S  BURGER )    "<<endl;
-    cout<<"    (___________________)    "<<endl;
-    cout<<"    @@@@@@@@@@@@@@@@@@@@@   "<<endl;
-    cout<<"     ___________________    "<<endl;
-    cout<<"    (___________________)   "<<endl;
+    cout<<"       _________________      "<<endl;
+    cout<<"      ( ' ' ' '  ' ' ' ')     "<<endl;
+    cout<<"     (_'_'_'_'_'__'_'_'_')    "<<endl;
+    cout<<"     /#/#/#/#/#/#/#/#/#/#    "<<endl;
+    cout<<"     =_=_=_=_=_=_=_=_=_=_=   "<<endl;
+    cout<<"     ( ORLANDO'S  BURGER )    "<<endl;
+    cout<<"     (___________________)    "<<endl;
+    cout<<"     @@@@@@@@@@@@@@@@@@@@@   "<<endl;
+    cout<<"      ___________________    "<<endl;
+    cout<<"     (___________________)   "<<endl;
     cout<<endl;
-    cout<<"____________________________"<<endl;
-    cout<<"|                          |"<<endl;
-    cout<<"|     1- NOVO CLIENTE      |"<<endl;
-    cout<<"|    2- BUSCAR NA FILA     |"<<endl;
-    cout<<"|     3- FAZER PEDIDO      |"<<endl;
-    cout<<"|    4- CHAMAR PEDIDO      |"<<endl;
-    cout<<"|    5- MOSTRAR PEDIDOS    |"<<endl;
-    cout<<"|     6- MOSTRAR VOTOS     |"<<endl;
-    cout<<"|     7- MOSTRAR FILAS     |"<<endl;
-    cout<<"|    0- SAIR DO PROGRAMA   |"<<endl;
-    cout<<"|__________________________|"<<endl;
-    cout<<"| OPÇÂO: ";
+    cout<<" ____________________________"<<endl;
+    cout<<" |                          |"<<endl;
+    cout<<" |     1- NOVO CLIENTE      |"<<endl;
+    cout<<" |    2- BUSCAR NA FILA     |"<<endl;
+    cout<<" |     3- FAZER PEDIDO      |"<<endl;
+    cout<<" |    4- CHAMAR PEDIDO      |"<<endl;
+    cout<<" |    5- MOSTRAR PEDIDOS    |"<<endl;
+    cout<<" |     6- MOSTRAR VOTOS     |"<<endl;
+    cout<<" |     7- MOSTRAR FILAS     |"<<endl;
+    cout<<" |    0- SAIR DO PROGRAMA   |"<<endl;
+    cout<<" |__________________________|"<<endl;
+    cout<<" |_OPÇÂO: ";
     cin>>seletor;
     system("CLS");
     cout<<endl;
     switch(seletor){
             case 1:{
-                cout<<"____________________________"<<endl;
-                cout<<"|                          |"<<endl;
-                cout<<"|      *NOVO  CLIENTE*     |"<<endl;
-                cout<<"|    NOME: ";
+                cout<<" ____________________________"<<endl;
+                cout<<" |                          |"<<endl;
+                cout<<" |      *NOVO  CLIENTE*     |"<<endl;
+                cout<<" |    NOME: ";
                 cin>>nome;
-                cout<<"|    IDADE: ";
+                cout<<" |    IDADE: ";
                 cin>>idade;
-                cout<<"|__________________________|"<<endl;
+                cout<<" |__________________________|"<<endl;
                 inserir_no_final(nome,idade);
                 break;
                 }
 
             case 2:{
-                cout<<"____________________________"<<endl;
-                cout<<"|                          |"<<endl;
-                cout<<"|    *PESQUISA POR NOME*   |"<<endl;
-                cout<<"|  NOME: ";
+                cout<<" ____________________________"<<endl;
+                cout<<" |                          |"<<endl;
+                cout<<" |    *PESQUISA POR NOME*   |"<<endl;
+                cout<<" |  NOME: ";
                 cin>>nome;
-                cout<<"|__________________________|"<<endl;
+                cout<<" |__________________________|"<<endl;
                 encontrar(nome);
                 break;
             }
 
             case 3:{
                 if(vazio_idoso() && vazio_geral()){
-                    cout<<"____________________________"<<endl;
-                    cout<<"|                          |"<<endl;
-                    cout<<"|       FILAS VAZIAS       |"<<endl;
-                    cout<<"|__________________________|"<<endl;
+                    cout<<" ____________________________"<<endl;
+                    cout<<" |                          |"<<endl;
+                    cout<<" |       FILAS VAZIAS       |"<<endl;
+                    cout<<" |__________________________|"<<endl;
                     cout<<endl;
                     system("pause");
                     system("CLS");
@@ -590,12 +612,12 @@ int main(){
                 break;
             }
             case 4:{
-                cout<<"____________________________"<<endl;
-                cout<<"|                          |"<<endl;
-                cout<<"|    *CHAMAR POR NUMERO*   |"<<endl;
-                cout<<"| NUMERO: ";
+                cout<<" ____________________________"<<endl;
+                cout<<" |                          |"<<endl;
+                cout<<" |    *CHAMAR POR NUMERO*   |"<<endl;
+                cout<<" | NUMERO: ";
                 cin>>numero;
-                cout<<"|__________________________|"<<endl;
+                cout<<" |__________________________|"<<endl;
                 chamar(numero);
                 break;
                 }
@@ -630,11 +652,6 @@ int main(){
     cout<<"    |  |    |  |  |  | | |   | | | |   | |    |  | |____  | |____  | | |   | ||   |"<<endl;
     cout<<"    |  |    |  |__|  | | |___| | | |___| |    |  |  ____| |  ____| | | |___| |   /"<<endl;
     cout<<"    |__|    |________| |______/  |_______|    |__| |______| |______| |_______| (_)"<<endl;
-
-
-
-
-
     system("pause");
     limpar_memorias();
 	return 0;
