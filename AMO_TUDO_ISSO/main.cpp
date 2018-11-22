@@ -46,10 +46,12 @@ static Cliente aux_geral = NULL;
 static Pedido head_ped = NULL;
 static Pedido tail_ped = NULL;
 static Pedido aux_ped = NULL;
+static Pedido prev_ped = NULL;
 
 static Espera head_esp = NULL;
 static Espera tail_esp = NULL;
 static Espera aux_esp = NULL;
+static Espera prev_esp = NULL;
 
 static Votos votos = NULL;
 
@@ -419,6 +421,7 @@ void votar(){
 
 void chamar(int numero_chamado){
      cout << endl;
+     int select =0;
     if(vazio_ped()){
         cout<<"  _______________________________"<<endl;
         cout<<" |                               |"<<endl;
@@ -426,16 +429,21 @@ void chamar(int numero_chamado){
         cout<<" |_______________________________|"<<endl;
         cout << endl;
     }else{
+
         aux_ped = head_ped;
          if(aux_ped!=NULL){
             while (aux_ped->proximo != NULL && aux_ped->numero != numero_chamado){
+                prev_ped = aux_ped;
                 aux_ped = aux_ped->proximo;
+                select = select + 1;
             }
         }
          aux_esp = head_esp;
          if(aux_esp!=NULL){
             while (aux_esp->proximo != NULL && aux_esp->numero != numero_chamado){
-                aux_ped = aux_ped->proximo;
+                prev_esp = aux_esp;
+                aux_esp = aux_esp->proximo;
+                select = select +1;
             }
          }
             if(aux_ped->numero == numero_chamado){
@@ -450,16 +458,22 @@ void chamar(int numero_chamado){
             }
                //DELETAR DAS FILAS PEDIDOS E ESPERA
               //temp = head;
-              NODOIS *prev_ped;
-              prev_ped = aux_ped;
-              prev_ped->proximo = aux_ped->proximo;
-
-              NOTRES *prev_esp;
-              prev_esp = aux_esp;
-              prev_esp->proximo = aux_esp->proximo;
+              if(select != 0){
+                  prev_ped->proximo=aux_ped->proximo;
+                  aux_ped->proximo = NULL;
+                  prev_esp->proximo=aux_esp->proximo;
+                  aux_esp->proximo = NULL;
+                  }else{
+                   aux_esp = head_esp;
+                   head_esp = head_esp->proximo;
+                   aux_esp->proximo = NULL;
+                   aux_ped = head_ped;
+                   head_ped = head_ped->proximo;
+                   aux_ped->proximo = NULL;
+                  }
               delete aux_ped;
               delete aux_esp;
-
+              select =0 ;
     }
     system("pause");
     system("CLS");
@@ -470,10 +484,12 @@ void remover(int x){
         if(x ==1){
           aux_idoso = head_idoso;
           head_idoso = head_idoso->proximo;
+          aux_idoso->proximo = NULL;
           delete aux_idoso;
         }else{
           aux_geral = head_geral;
           head_geral = head_geral->proximo;
+          aux_geral->proximo = NULL;
           delete aux_geral;
         }
         /*
@@ -497,6 +513,8 @@ void limpar_memorias(){
     delete tail_ped;
     delete tail_esp;
     delete votos;
+    delete prev_esp;
+    delete prev_ped;
 
     while (head_geral->proximo != NULL) {
         Marvel = head_geral;
@@ -639,15 +657,15 @@ int main(){
     system("CLS");
     cout<<"  _____   __    __   _______       __    __   __    __   __   ________   _______  "<<endl;
     cout<<" |  _  | |  |  |  | |  ___  |     |  |  |  | |  |  |  | |  | |__   ___| |  ___  | "<<endl;
-    cout<<" | |_| | |    /   | | |   | |     |    /   | |  |  |  | |  |    |  |    | |   | | "<<endl;
-    cout<<" |  _  | | |   /| | | |   | |     | |   /| | |  |  |  | |  |    |  |    | |   | | "<<endl;
-    cout<<" | | | | | |  / | | | |___| |     | |  / | | |  |__|  | |  |    |  |    | |___| | "<<endl;
+    cout<<" | |_| | |  \\/   | | |   | |     |  \\/   | |  |  |  | |  |    |  |    | |   | | "<<endl;
+    cout<<" |  _  | | |\\ /| | | |   | |     | |\\ /| | |  |  |  | |  |    |  |    | |   | | "<<endl;
+    cout<<" | | | | | |\\/ | | | |___| |     | |\\/ | | |  |__|  | |  |    |  |    | |___| | "<<endl;
     cout<<" |_| |_| |_|    |_| |_______|     |_|    |_| |________| |__|    |__|    |_______| "<<endl;
     cout<<"  ________   __    __   ______    _______      __   ______   ______   _______  ___ "<<endl;
-    cout<<" |__   ___| |  |  |  | |  ___    |  ___  |    |  | |  ____| |   ___| |  ___  ||   |"<<endl;
+    cout<<" |__   ___| |  |  |  | |  ___\\  |  ___  |    |  | |  ____| |   ___| |  ___  ||   |"<<endl;
     cout<<"    |  |    |  |  |  | | |   | | | |   | |    |  | | |____  | |____  | |   | ||   |"<<endl;
     cout<<"    |  |    |  |  |  | | |   | | | |   | |    |  | |____  | |____  | | |   | ||   |"<<endl;
-    cout<<"    |  |    |  |__|  | | |___| | | |___| |    |  |  ____| |  ____| | | |___| |   /"<<endl;
+    cout<<"    |  |    |  |__|  | | |___| | | |___| |    |  |  ____| |  ____| | | |___| |\\ /"<<endl;
     cout<<"    |__|    |________| |______/  |_______|    |__| |______| |______| |_______| (_)"<<endl;
     system("pause");
     limpar_memorias();
